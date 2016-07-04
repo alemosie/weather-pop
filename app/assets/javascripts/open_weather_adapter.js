@@ -10,19 +10,23 @@ function createQuery(event){
 
   var location = $("#location").val()
   var api = new OpenWeatherAdapter(location);
-
-  $("#location").empty();
-  alert(location);
-  // api.getWeatherData();
+  api.getWeatherData();
 }
 
 function OpenWeatherAdapter(location) {
-  this.location = location;
-  this.url = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=APIKEY";
+  this.location = this.convertLocationForURL(location);
+  this.url = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&APPID=APIKEY";
 }
 
-function getWeatherData() {
+OpenWeatherAdapter.prototype.convertLocationForURL = function(location) {
+  return location.replace(/\s+/g, ''); // rids location of spacing for API call URL
+}
+
+OpenWeatherAdapter.prototype.getWeatherData = function() {
   $.getJSON(this.url, function(response) {
-    var weather = response.weather[0].description
-  }).appendTo("#cur-weather");
+    response.list.forEach(function(forecast){
+      var day = new DayForecast(forecast, response.city)
+      $('#cur-weather').append(day.weatherSimple)
+    });
+  });
 }
