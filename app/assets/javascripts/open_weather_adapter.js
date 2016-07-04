@@ -1,5 +1,3 @@
-// http://api.openweathermap.org/data/2.5/weather?q=newyork&APPID=APIKEY
-
 $(document).ready(function(){
   $('#submit').click(createQuery);
 });
@@ -15,7 +13,7 @@ function createQuery(event){
 
 function OpenWeatherAdapter(location) {
   this.location = this.convertLocationForURL(location);
-  this.url = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&APPID=APIKEY";
+  this.url = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&APPID=";
 }
 
 OpenWeatherAdapter.prototype.convertLocationForURL = function(location) {
@@ -26,7 +24,7 @@ OpenWeatherAdapter.prototype.getWeatherData = function() {
   $.getJSON(this.url, function(response) {
     response.list.forEach(function(forecast){
       var day = new DayForecast(forecast, response.city)
-      $('#cur-weather').append(day.weatherSimple)
+      $('#cur-weather').append(day.appendInfo())
     });
   });
 }

@@ -1,5 +1,6 @@
 function DayForecast(json, location){
-  this.dateTime = new Date(json.dt_txt);
+  this.dateTime = this.convertForecastDateTime(json.dt_txt);
+  this.time = this.getForecastTime();
   this.dayOfWeek = this.getDayOfWeek();
   this.relativeDayOfWeek = this.getRelativeDayOfWeek();
   this.location = location.name;
@@ -11,8 +12,27 @@ function DayForecast(json, location){
   this.cloudCover = json.clouds.all;
 }
 
+DayForecast.prototype.convertForecastDateTime = function(respDT){
+  var dateTime = new Date(respDT);
+  var now = new Date();
+  // get the hours' difference between UDT and local time, since Javascript date parsing automatically converts string to local time.
+  var hoursDifferential = now.getTimezoneOffset() / 60
+  dateTime.setHours(dateTime.getHours() - hoursDifferential);
+  return dateTime;
+}
+
+DayForecast.prototype.getForecastTime = function(){
+  var timeOfDay = "AM";
+  var hours = this.dateTime.getHours();
+  if (this.dateTime.getHours() >= 12){
+    timeOfDay = "PM";
+    hours = this.dateTime.getHours() - 12;
+  }
+  return hours + ":00 " + timeOfDay;
+}
+
 DayForecast.prototype.convertTemp = function(temp){
-  return (1.8 * (temp - 273)) + 32;
+  return Math.round((1.8 * (temp - 273)) + 32);
 }
 
 DayForecast.prototype.getDayOfWeek = function(){
@@ -45,10 +65,22 @@ DayForecast.prototype.getRelativeDayOfWeek = function(){
   var curDay = curDate.getDay();
   var responseDay = this.dateTime.getDay();
   if (curDay === responseDay){
-    return "today"
+    return "Today"
   } else if ((responseDay - curDay) === 1){
-    return "tomorrow"
+    return "Tomorrow"
   } else {
-    return this.dateTime.getDayOfWeek();
+    return this.dayOfWeek;
   }
+}
+
+DayForecast.prototype.formatDay = function(){
+  return "<h1>" + this.relativeDayOfWeek + "'s weather at " + this.time + " is:</h1>";
+}
+
+DayForecast.prototype.formatTempAndWeather = function(){
+  return "<h2>" + this.temp + " degrees and " + this.weatherDetails + ".</h2>";
+}
+
+DayForecast.prototype.appendInfo = function(){
+  return "<div>" + this.formatDay() + this.formatTempAndWeather() + "</div><br>";
 }
