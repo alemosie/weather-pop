@@ -15,3 +15,20 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+  @import 'https://fonts.googleapis.com/css?family=Bungee+Inline|Bungee+Shade';
+
+body {
+  background-color: white;
+  height: 100%;
+  // 2C2E3A
+}
+
+
+.page-header {
+  font-family: 'Bungee Shade', cursive;
+  font-family: 'Bungee Inline', cursive;
+  background-color: white;
+  font-size: 60px;
+  padding-top: 2px;
+  padding-left: 30px;
+}

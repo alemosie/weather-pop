@@ -10,6 +10,10 @@ function DayForecast(json, location){
   this.weatherSimple = json.weather[0].main;
   this.weatherDetails = json.weather[0].description;
   this.cloudCover = json.clouds.all;
+
+  // formatting
+  this.weatherImage = "";
+  this.tempColor = this.getTempColor(this.temp);
 }
 
 DayForecast.prototype.convertForecastDateTime = function(respDT){
@@ -73,14 +77,43 @@ DayForecast.prototype.getRelativeDayOfWeek = function(){
   }
 }
 
+//formatting
+
+DayForecast.prototype.getTempColor = function(temp){
+  if (temp > 90) {
+    return "#CD0805"
+  } else if (temp > 80) {
+    return "#CD5405"
+  } else if (temp > 70) {
+    return "#CDBB05"
+  } else if (temp > 60) {
+    return "#3FCD05"
+  } else if (temp > 50) {
+    return "#05CD87"
+  } else if (temp > 40) {
+    return "#05CDBB"
+  } else if (temp > 30) {
+    return "#05B8CD"
+  } else if (temp > 20) {
+    return "#057ECD"
+  } else {
+    return "#0520CD"
+  }
+}
+
+
 DayForecast.prototype.formatDay = function(){
   return "<h1>" + this.relativeDayOfWeek + "'s weather at " + this.time + " is:</h1>";
 }
 
 DayForecast.prototype.formatTempAndWeather = function(){
-  return "<h2>" + this.temp + " degrees and " + this.weatherDetails + ".</h2>";
+  return '<h1 style="color:' + this.tempColor + '">' + this.temp + "&deg; + " + '<span class="clouds"> ' + this.weatherDetails + "</span></h1>";
 }
 
 DayForecast.prototype.appendInfo = function(){
-  return "<div>" + this.formatDay() + this.formatTempAndWeather() + "</div><br>";
+  if (this.relativeDayOfWeek === "Today") {
+    return '<div><h2>@' + this.time + ': </h2>' + this.formatTempAndWeather() + '</div><br>';
+  } else {
+    return "<div>" + this.formatDay() + this.formatTempAndWeather() + "</div><br>";
+  }
 }

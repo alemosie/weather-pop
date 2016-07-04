@@ -1,3 +1,55 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#forecast-bars {
+  color: white;
+  height:100vh;
+}
+
+.clouds {
+  color: gray;
+
+  -webkit-border-image: url("https://i.ytimg.com/vi/4CUvF95pmxY/maxresdefault.jpg") 30 round; /* Safari 3.1-5 */
+  -o-border-image: url("https://i.ytimg.com/vi/4CUvF95pmxY/maxresdefault.jpg") 30 round; /* Opera 11-12.1 */
+  border-image: url("https://i.ytimg.com/vi/4CUvF95pmxY/maxresdefault.jpg") 30 round;
+
+  border: 5px solid black;
+  padding: 0 10px 5px 10px;
+}
+
+#tomorrow {
+  background-color: red;
+  height: 100%;
+  color: white;
+  font-size: 2em;
+}
+
+#tomorrow a:hover {
+  text-decoration: none;
+}
+
+#plus-1 {
+  background-color: purple;
+  height: 100%;
+}
+
+#plus-2 {
+  background-color: gray;
+  height: 100%;
+}
+
+#plus-3 {
+  background-color: green;
+  height: 100%;
+}
+
+#plus-4 {
+  background-color: blue;
+  height: 100%;
+}
+
+#plus-5 {
+  background-color: orange;
+  height: 100%;
+}

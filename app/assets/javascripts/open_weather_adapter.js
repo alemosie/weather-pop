@@ -1,30 +1,41 @@
 $(document).ready(function(){
-  $('#submit').click(createQuery);
+  event.preventDefault();
+  event.stopPropagation();
+
+  // var location = $("#location").val()
+  // set default location
+  var api = new OpenWeatherAdapter("newyork");
+  api.getWeatherData();
 });
 
 function createQuery(event){
   event.preventDefault();
   event.stopPropagation();
 
-  var location = $("#location").val()
-  var api = new OpenWeatherAdapter(location);
-  api.getWeatherData();
+  // var location = $("#location").val()
+  // set default location
+  // var api = new OpenWeatherAdapter("newyork");
+  // api.getWeatherData();
 }
 
 function OpenWeatherAdapter(location) {
-  this.location = this.convertLocationForURL(location);
-  this.url = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&APPID=";
+  this.location = location;
+  this.key = $('#key').val();
+  this.url = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&APPID=" + this.key;
 }
 
-OpenWeatherAdapter.prototype.convertLocationForURL = function(location) {
-  return location.replace(/\s+/g, ''); // rids location of spacing for API call URL
-}
+// OpenWeatherAdapter.prototype.convertLocationForURL = function(location) {
+//   rids location of spacing for API call URL
+//   return location.replace(/\s+/g, '');
+// }
 
 OpenWeatherAdapter.prototype.getWeatherData = function() {
   $.getJSON(this.url, function(response) {
     response.list.forEach(function(forecast){
       var day = new DayForecast(forecast, response.city)
-      $('#cur-weather').append(day.appendInfo())
+      if (day.relativeDayOfWeek === "Today"){
+        $('#current-weather').append(day.appendInfo());
+      }
     });
   });
 }
