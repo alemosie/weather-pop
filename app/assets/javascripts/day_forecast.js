@@ -58,7 +58,7 @@ DayForecast.prototype.getRelativeDayOfWeek = function(){
 
 // get color associated with temperature
 DayForecast.prototype.getTempColor = function(temp){
-  if (temp > 90) {
+  if (temp >= 90) {
     return "#CD0805" // red
   } else if (temp >= 80) {
     return "#CD5405"

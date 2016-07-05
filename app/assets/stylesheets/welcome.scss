@@ -4,28 +4,25 @@
 
 
 //// styling for today's forecasts
+
+// for temp
 .current-main {
   font-size: 2em;
   padding: 12px 10px 10px 10px;
 }
 
-.current-details {
-  font-size: 1.2em;
-}
-
-#current-weather {
-  margin-left: 10px;
-  padding: 32px 20px 20px 20px;
-  background-color: #EFF0B8;
-  border: 5px solid black;
-  height: 100%;
-}
-
+// for weather
 .current-weather-text {
   color: black;
   padding: 0 10px 5px 10px;
 }
 
+// for humidity & cloud details
+.current-details {
+  font-size: 1.2em;
+}
+
+// for time
 .current-time {
   background-color: gray;
   font-weight: bold;
@@ -34,7 +31,22 @@
   font-size: 2em;
 }
 
+// div that contains today's forecasts
+#current-weather {
+  margin-left: 10px;
+  padding: 32px 20px 20px 20px;
+  background-color: #EFF0B8;
+  border: 5px solid black;
+  height: 100%;
+}
+
 //// styling for beyond today's forecasts
+
+// div that contains day's forecasts
+.forecast-div {
+  display: inline-block;
+  padding-left: 40px;
+}
 
 // weekday header
 .day-header {
@@ -43,12 +55,7 @@
   border-bottom: 5px solid gray;
 }
 
-
-.forecast-bars {
-  display: inline-block;
-  padding-left: 40px;
-}
-
+// box with individual forecast
 .day-box {
   height:120px;
   width:120px;
@@ -63,11 +70,7 @@
   font-weight: bold;
 }
 
-.circle {
-  border-radius: 50%;
-  background-color: white;
-}
-
+// time bar
 .future-time {
   font-weight: bold;
   color: white;
