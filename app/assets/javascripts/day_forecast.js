@@ -2,12 +2,11 @@ function DayForecast(json, location){
   this.dateTime = this.convertForecastDateTime(json.dt_txt);
   this.time = this.getForecastTime();
   this.relativeDayOfWeek = this.getRelativeDayOfWeek();
-  this.location = location.name;
   this.temp = this.convertTemp(json.main.temp);
   this.humidity = json.main.humidity;
+  this.cloudCover = json.clouds.all;
   this.weatherSimple = json.weather[0].main;
   this.weatherDetails = json.weather[0].description;
-  this.cloudCover = json.clouds.all;
   this.tempColor = this.getTempColor(this.temp);
 }
 
@@ -40,7 +39,7 @@ DayForecast.prototype.convertTemp = function(temp){
   return Math.round((1.8 * (temp - 273)) + 32);
 }
 
-// find how far away from today forecast is
+// find how far away from today forecast day is
 DayForecast.prototype.getRelativeDayOfWeek = function(){
   var curDate = new Date();
   var curDay = curDate.getDay();
@@ -83,7 +82,9 @@ DayForecast.prototype.getTempColor = function(temp){
 // create text/styling for today's weather
 
 DayForecast.prototype.formatCurrentTempAndWeather = function(){
-  return '<span class="current-main" style="background-color:white; color:' + this.tempColor + '">' + " <b>" + this.temp + "&deg;</b>" + '<span class="current-weather-text">+ ' + this.weatherDetails + "</span></span>";
+  var text = '<span class="current-main" style="background-color:white; color:' + this.tempColor + '">' + " <b>" + this.temp + "&deg;</b>" + '<span class="current-weather-text">+ ' + this.weatherDetails + '</span></span>'
+  var detailsButton = ' <button type="button" id="current-details-button" class="btn btn-secondary btn-sm">details</button>';
+  return text + detailsButton;
 }
 
 DayForecast.prototype.currentWeatherDetails = function(){
