@@ -2,16 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+// styling for today's forecasts
 .current-main {
-  // font-family: 'Amiko', sans-serif;
   font-size: 2em;
   padding: 12px 10px 10px 10px;
 }
 
 .current-details {
-  // font-family: 'Amiko', sans-serif;
   font-size: 1.2em;
 }
+
+#details{
+  font-style: italic;
+  font-size: 3em;
+}
+
+// styling for beyond today's forecasts
 
 .forecast-bars {
   height:100vh;
@@ -40,23 +47,6 @@
   font-family: 'Pacifico', cursive;
   font-size: 3em;
   border-bottom: 5px solid gray;
-}
-
-.rotate {
-  /* Safari */
-  -webkit-transform: rotate(-90deg);
-
-  /* Firefox */
-  -moz-transform: rotate(-90deg);
-
-  /* IE */
-  -ms-transform: rotate(-90deg);
-
-  /* Opera */
-  -o-transform: rotate(-90deg);
-
-  /* Internet Explorer */
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .circle {

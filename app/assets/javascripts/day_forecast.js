@@ -1,5 +1,5 @@
 function DayForecast(json, location){
-  this.dateTime = this.convertForecastDateTime(json.dt_txt, json);
+  this.dateTime = this.convertForecastDateTime(json.dt_txt);
   this.time = this.getForecastTime();
   this.relativeDayOfWeek = this.getRelativeDayOfWeek();
   this.location = location.name;
@@ -8,13 +8,13 @@ function DayForecast(json, location){
   this.weatherSimple = json.weather[0].main;
   this.weatherDetails = json.weather[0].description;
   this.cloudCover = json.clouds.all;
-
-  // formatting
-  this.weatherImage = "";
   this.tempColor = this.getTempColor(this.temp);
 }
 
-DayForecast.prototype.convertForecastDateTime = function(respDT, json){
+//////----- DATA MANIPULATION -----//////
+
+// associate Date/Time object with forecast
+DayForecast.prototype.convertForecastDateTime = function(respDT){
   var formattedDate = respDT.replace(/-/g, "/") // for Safari compatibility
   var dateTime = new Date(formattedDate);
   var now = new Date();
@@ -24,6 +24,7 @@ DayForecast.prototype.convertForecastDateTime = function(respDT, json){
   return dateTime;
 }
 
+// extract time from forecast date/time
 DayForecast.prototype.getForecastTime = function(){
   var timeOfDay = "AM";
   var hours = this.dateTime.getHours();
@@ -34,10 +35,12 @@ DayForecast.prototype.getForecastTime = function(){
   return hours + ":00 " + timeOfDay;
 }
 
+// convert temperature from kelvin to fahrenheit
 DayForecast.prototype.convertTemp = function(temp){
   return Math.round((1.8 * (temp - 273)) + 32);
 }
 
+// find how far away from today forecast is
 DayForecast.prototype.getRelativeDayOfWeek = function(){
   var curDate = new Date();
   var curDay = curDate.getDay();
@@ -51,11 +54,12 @@ DayForecast.prototype.getRelativeDayOfWeek = function(){
   }
 }
 
-//formatting
+//////----- FORMATTING -----//////
 
+// get color associated with temperature
 DayForecast.prototype.getTempColor = function(temp){
   if (temp > 90) {
-    return "#CD0805"
+    return "#CD0805" // red
   } else if (temp >= 80) {
     return "#CD5405"
   } else if (temp >= 70) {
@@ -71,9 +75,12 @@ DayForecast.prototype.getTempColor = function(temp){
   } else if (temp >= 20) {
     return "#057ECD"
   } else {
-    return "#0520CD"
+    return "#0520CD" // blue
   }
 }
+
+//:: Current Weather
+// create text/styling for today's weather
 
 DayForecast.prototype.formatCurrentTempAndWeather = function(){
   var main = '<span class="current-main" style="background-color:white; color:' + this.tempColor + '">' + " <b>" + this.temp + "&deg;</b>" + '<span id="weather">+ ' + this.weatherDetails + "</span></span>";
@@ -81,10 +88,20 @@ DayForecast.prototype.formatCurrentTempAndWeather = function(){
   return main;
 }
 
+DayForecast.prototype.currentWeatherDetails = function(){
+  var hum = '<p class="current-details"><b>Humidity:</b> ' + this.humidity + "%</p>";
+  var clouds = '<p class="current-details"><b>Cloud coverage:</b> ' + this.cloudCover + "%</p>";
+  return hum + clouds;
+}
+
+//:: Future Weather
+
+// create text/styling for forecasts tomorrow and beyond
 DayForecast.prototype.formatFutureTempAndWeather = function(){
   return '<span style="color:' + this.tempColor + '">' + this.temp + "&deg;<br>" + this.getWeatherIcon() + "</span>"
 }
 
+// get weather icon associated with forecast
 DayForecast.prototype.getWeatherIcon = function(){
   if (this.weatherSimple.toLowerCase().includes("cloud")){
     return '<img src="http://simpleicon.com/wp-content/uploads/cloud-10.png" height=40 width=40>'
@@ -97,15 +114,10 @@ DayForecast.prototype.getWeatherIcon = function(){
   }
 }
 
-DayForecast.prototype.currentWeatherDetails = function(){
-  var hum = '<p class="current-details"><b>Humidity:</b> ' + this.humidity + "%</p>";
-  var clouds = '<p class="current-details"><b>Cloud coverage:</b> ' + this.cloudCover + "%</p>";
-  return hum + clouds;
-}
-
+// append text/styling for all forecasts
 DayForecast.prototype.appendInfo = function(){
   if (this.relativeDayOfWeek === "Today") {
-    return '<div><span id="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '</div><br>';
+    return '<div><span id="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + ' <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></div><br>';
   } else {
     return '<div class="day-box"><div class="future-time">' + this.time + '</div>' + this.formatFutureTempAndWeather() + '</div>'
   }

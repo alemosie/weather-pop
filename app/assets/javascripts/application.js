@@ -14,3 +14,39 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function(){
+  var api = new OpenWeatherAdapter("newyork");
+  api.getWeatherData();
+});
+
+function addDays(days) {
+  var now = new Date();
+  now.setDate(now.getDate() + days);
+  return now;
+}
+
+function getDayOfWeek(date){
+  switch (date.getDay()) {
+    case 0:
+        return "Sunday";
+        break;
+    case 1:
+        return "Monday";
+        break;
+    case 2:
+        return "Tuesday";
+        break;
+    case 3:
+        return "Wednesday";
+        break;
+    case 4:
+        return "Thursday";
+        break;
+    case 5:
+        return "Friday";
+        break;
+    case 6:
+        return "Saturday";
+  }
+}
