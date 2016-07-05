@@ -17,9 +17,20 @@
   padding: 0 10px 5px 10px;
 }
 
-// for humidity & cloud details
-.current-details {
-  font-size: 1.2em;
+// for humidity & cloud details button
+.current-details-button {
+  background: none;
+  border: none;
+
+  img {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 15px;
+  }
+}
+
+button:focus{
+  outline:0;
 }
 
 // for time
@@ -30,6 +41,7 @@
   padding: 10px;
   font-size: 2em;
 }
+
 
 // div that contains today's forecasts
 #current-weather {

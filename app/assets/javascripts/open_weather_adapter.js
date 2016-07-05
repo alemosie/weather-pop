@@ -10,7 +10,6 @@ OpenWeatherAdapter.prototype.getWeatherData = function() {
       var day = new DayForecast(forecast, response_json.city)
       if (day.relativeDayOfWeek === "Today"){
         $('#current-weather').append(day.appendInfo());
-        // $('#current-weather').append(day.currentWeatherDetails());
       } else if (day.relativeDayOfWeek === "Tomorrow") {
         $('#tomorrow').append(day.appendInfo());
       } else if (day.relativeDayOfWeek === 2) {

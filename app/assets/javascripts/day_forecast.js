@@ -8,6 +8,7 @@ function DayForecast(json, location){
   this.weatherSimple = json.weather[0].main;
   this.weatherDetails = json.weather[0].description;
   this.tempColor = this.getTempColor(this.temp);
+  this.id = this.relativeDayOfWeek + this.time.split(":")[0];
 }
 
 //////----- DATA MANIPULATION -----//////
@@ -83,14 +84,21 @@ DayForecast.prototype.getTempColor = function(temp){
 
 DayForecast.prototype.formatCurrentTempAndWeather = function(){
   var text = '<span class="current-main" style="background-color:white; color:' + this.tempColor + '">' + " <b>" + this.temp + "&deg;</b>" + '<span class="current-weather-text">+ ' + this.weatherDetails + '</span></span>'
-  var detailsButton = ' <button type="button" id="current-details-button" class="btn btn-secondary btn-sm">details</button>';
-  return text + detailsButton;
+  var button = ' <button type="button" onclick=showDetails(\'' + this.id + '\') class="current-details-button"><img src="http://iconshow.me/media/images/ui/ios7-icons/png/256/plus-outline.png"></button>'
+  return text + button;
 }
 
-DayForecast.prototype.currentWeatherDetails = function(){
-  var hum = '<p class="current-details"><b>Humidity:</b> ' + this.humidity + "%</p>";
-  var clouds = '<p class="current-details"><b>Cloud coverage:</b> ' + this.cloudCover + "%</p>";
-  return hum + clouds;
+// toggle the details for selected weather forecast
+function showDetails(id){
+  $("#" + id).toggle("slow");
+}
+
+DayForecast.prototype.currentWeatherDetails = function(index){
+  var tableHead = '<table id=' + this.id + ' style="display:none;width:100%"><tr><th><h4>Humidity</h4></th><th><h4>Cloud coverage</h4></th></tr><tr>'
+  var tableFoot = '</tr></table>'
+  var hum = '<td>' + this.humidity + "%</td>";
+  var clouds = '<td>' + this.cloudCover + "%</td>";
+  return tableHead + hum + clouds + tableFoot;
 }
 
 //:: Future Weather
@@ -116,7 +124,7 @@ DayForecast.prototype.getWeatherIcon = function(){
 // append text/styling for all forecasts
 DayForecast.prototype.appendInfo = function(){
   if (this.relativeDayOfWeek === "Today") {
-    return '<div><span class="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '</div><br>';
+    return '<div><span class="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '<br><br>' + this.currentWeatherDetails() + '</div><br><br>';
   } else {
     return '<div class="day-box"><div class="future-time">' + this.time + '</div>' + this.formatFutureTempAndWeather() + '</div>'
   }
