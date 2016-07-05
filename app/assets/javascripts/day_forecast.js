@@ -90,7 +90,7 @@ DayForecast.prototype.formatCurrentTempAndWeather = function(){
 
 // toggle the details for selected weather forecast
 function showDetails(id){
-  $("#" + id).toggle("slow");
+  $("#" + id).toggle();
 }
 
 DayForecast.prototype.currentWeatherDetails = function(index){
