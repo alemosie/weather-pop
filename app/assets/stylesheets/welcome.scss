@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.current-main {
+  // font-family: 'Amiko', sans-serif;
+  font-size: 2em;
+  padding: 12px 10px 10px 10px;
+}
+
+.current-details {
+  // font-family: 'Amiko', sans-serif;
+  font-size: 1.2em;
+}
+
 .forecast-bars {
   height:100vh;
   display: inline-block;

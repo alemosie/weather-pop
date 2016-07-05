@@ -1,10 +1,8 @@
 function DayForecast(json, location){
   this.dateTime = this.convertForecastDateTime(json.dt_txt);
   this.time = this.getForecastTime();
-  this.dayOfWeek = this.getDayOfWeek();
   this.relativeDayOfWeek = this.getRelativeDayOfWeek();
   this.location = location.name;
-  this.locationId = location.id;
   this.temp = this.convertTemp(json.main.temp);
   this.humidity = json.main.humidity;
   this.weatherSimple = json.weather[0].main;
@@ -23,6 +21,7 @@ DayForecast.prototype.convertForecastDateTime = function(respDT){
   var hoursDifferential = now.getTimezoneOffset() / 60
   dateTime.setHours(dateTime.getHours() - hoursDifferential);
   return dateTime;
+  debugger
 }
 
 DayForecast.prototype.getForecastTime = function(){
@@ -37,31 +36,6 @@ DayForecast.prototype.getForecastTime = function(){
 
 DayForecast.prototype.convertTemp = function(temp){
   return Math.round((1.8 * (temp - 273)) + 32);
-}
-
-DayForecast.prototype.getDayOfWeek = function(){
-  switch (this.dateTime.getDay()) {
-    case 0:
-        return "Sunday";
-        break;
-    case 1:
-        return "Monday";
-        break;
-    case 2:
-        return "Tuesday";
-        break;
-    case 3:
-        return "Wednesday";
-        break;
-    case 4:
-        return "Thursday";
-        break;
-    case 5:
-        return "Friday";
-        break;
-    case 6:
-        return "Saturday";
-  }
 }
 
 DayForecast.prototype.getRelativeDayOfWeek = function(){
@@ -102,7 +76,9 @@ DayForecast.prototype.getTempColor = function(temp){
 }
 
 DayForecast.prototype.formatCurrentTempAndWeather = function(){
-  return '<h1 style="color:' + this.tempColor + '">' + this.getWeatherIcon() + " " + this.temp + "&deg;" + '<span id="weather">+ ' + this.weatherDetails + "</span></h1>";
+  var main = '<span class="current-main" style="background-color:white; color:' + this.tempColor + '">' + " <b>" + this.temp + "&deg;</b>" + '<span id="weather">+ ' + this.weatherDetails + "</span></span>";
+  var details = '<p class="current-details">(details)</span>'
+  return main;
 }
 
 DayForecast.prototype.formatFutureTempAndWeather = function(){
@@ -119,6 +95,12 @@ DayForecast.prototype.getWeatherIcon = function(){
   } else {
     return '<img src="http://www.freeiconspng.com/uploads/sun-icon-2.png" height=40 width=40>'
   }
+}
+
+DayForecast.prototype.currentWeatherDetails = function(){
+  var hum = '<p class="current-details"><b>Humidity:</b> ' + this.humidity + "%</p>";
+  var clouds = '<p class="current-details"><b>Cloud coverage:</b> ' + this.cloudCover + "%</p>";
+  return hum + clouds;
 }
 
 DayForecast.prototype.appendInfo = function(){
