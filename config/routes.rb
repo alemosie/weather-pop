@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
+  root 'weather#index'
+  get 'data', to: 'weather#data'
 end
