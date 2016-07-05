@@ -1,10 +1,4 @@
 $(document).ready(function(){
-  event.preventDefault();
-  event.stopPropagation();
-
-  // var location = $("#location").val()
-  // set default location
-
   var api = new OpenWeatherAdapter("newyork");
   api.getWeatherData();
 });
