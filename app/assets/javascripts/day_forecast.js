@@ -83,9 +83,7 @@ DayForecast.prototype.getTempColor = function(temp){
 // create text/styling for today's weather
 
 DayForecast.prototype.formatCurrentTempAndWeather = function(){
-  var main = '<span class="current-main" style="background-color:white; color:' + this.tempColor + '">' + " <b>" + this.temp + "&deg;</b>" + '<span id="weather">+ ' + this.weatherDetails + "</span></span>";
-  var details = '<p class="current-details">(details)</span>'
-  return main;
+  return '<span class="current-main" style="background-color:white; color:' + this.tempColor + '">' + " <b>" + this.temp + "&deg;</b>" + '<span class="current-weather-text">+ ' + this.weatherDetails + "</span></span>";
 }
 
 DayForecast.prototype.currentWeatherDetails = function(){
@@ -117,7 +115,7 @@ DayForecast.prototype.getWeatherIcon = function(){
 // append text/styling for all forecasts
 DayForecast.prototype.appendInfo = function(){
   if (this.relativeDayOfWeek === "Today") {
-    return '<div><span id="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + ' <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></div><br>';
+    return '<div><span class="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '</div><br>';
   } else {
     return '<div class="day-box"><div class="future-time">' + this.time + '</div>' + this.formatFutureTempAndWeather() + '</div>'
   }

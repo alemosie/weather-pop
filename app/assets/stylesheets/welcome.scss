@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-// styling for today's forecasts
+//// styling for today's forecasts
 .current-main {
   font-size: 2em;
   padding: 12px 10px 10px 10px;
@@ -11,47 +11,6 @@
 
 .current-details {
   font-size: 1.2em;
-}
-
-#details{
-  font-style: italic;
-  font-size: 3em;
-}
-
-// styling for beyond today's forecasts
-
-.forecast-bars {
-  height:100vh;
-  display: inline-block;
-  padding-left: 40px;
-}
-
-.day-box {
-  height:120px;
-  width:120px;
-  border: 5px solid black;
-  margin: 10px;
-  font-size: 2em;
-  text-align: center;
-  display: inline-block;
-  font-weight: bold;
-  word-wrap: break-word;
-  background-color: white;
-}
-
-.day-box p {
-  font-size: 10px;
-}
-
-.day-header {
-  font-family: 'Pacifico', cursive;
-  font-size: 3em;
-  border-bottom: 5px solid gray;
-}
-
-.circle {
-  border-radius: 50%;
-  background-color: white;
 }
 
 #current-weather {
@@ -62,17 +21,51 @@
   height: 100%;
 }
 
-#weather {
+.current-weather-text {
   color: black;
   padding: 0 10px 5px 10px;
 }
 
-#current-time {
+.current-time {
   background-color: gray;
   font-weight: bold;
   color:white;
   padding: 10px;
   font-size: 2em;
+}
+
+//// styling for beyond today's forecasts
+
+// weekday header
+.day-header {
+  font-family: 'Pacifico', cursive;
+  font-size: 3em;
+  border-bottom: 5px solid gray;
+}
+
+
+.forecast-bars {
+  display: inline-block;
+  padding-left: 40px;
+}
+
+.day-box {
+  height:120px;
+  width:120px;
+  margin: 10px;
+  display: inline-block;
+
+  background-color: white;
+  border: 5px solid black;
+
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: white;
 }
 
 .future-time {

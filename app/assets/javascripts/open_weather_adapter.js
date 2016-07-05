@@ -1,14 +1,7 @@
 function OpenWeatherAdapter(location) {
   this.location = location;
-  this.url = "http://localhost:3000/data"
-  // this.key = $('#key').val();
-  // this.url = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&APPID=" + this.key;
+  this.url = "/data"
 }
-
-// OpenWeatherAdapter.prototype.convertLocationForURL = function(location) {
-//   rids location of spacing for API call URL
-//   return location.replace(/\s+/g, '');
-// }
 
 OpenWeatherAdapter.prototype.getWeatherData = function() {
   $.getJSON(this.url, function(response) {
@@ -29,9 +22,4 @@ OpenWeatherAdapter.prototype.getWeatherData = function() {
       }
     });
   });
-
-    $('#plus-2 .day-header').append(getDayOfWeek(addDays(2)));
-    $('#plus-3 .day-header').append(getDayOfWeek(addDays(3)));
-    $('#plus-4 .day-header').append(getDayOfWeek(addDays(4)));
-
 }
