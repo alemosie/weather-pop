@@ -2,54 +2,64 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#forecast-bars {
-  color: white;
+.forecast-bars {
   height:100vh;
+  display: inline-block;
 }
 
-.clouds {
-  color: gray;
-
-  -webkit-border-image: url("https://i.ytimg.com/vi/4CUvF95pmxY/maxresdefault.jpg") 30 round; /* Safari 3.1-5 */
-  -o-border-image: url("https://i.ytimg.com/vi/4CUvF95pmxY/maxresdefault.jpg") 30 round; /* Opera 11-12.1 */
-  border-image: url("https://i.ytimg.com/vi/4CUvF95pmxY/maxresdefault.jpg") 30 round;
-
+.day-box {
+  height:100px;
+  width:100px;
   border: 5px solid black;
+  margin: 10px;
+  font-size: 2em;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+  word-wrap: break-word;
+  background-color: white;
+}
+
+.day-box p {
+  font-size: 10px;
+}
+
+.day-header {
+  font-family: 'Pacifico', cursive;
+  font-size: 3em;
+  border-bottom: 5px solid gray;
+}
+
+// .vertical-text {
+// 	transform: rotate(90deg);
+// 	transform-origin: left bottom 0;
+//   font-size: 60px;
+//   font-weight: bold;
+//   float: left;
+//   height: 500px;
+// }
+
+.circle {
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid gray;
+}
+
+#current-weather {
+  padding: 0px 20px 20px 20px;
+  background-color: #EFF0B8;
+  border: 5px solid black;
+  height: 100%;
+}
+
+#weather {
+  color: black;
   padding: 0 10px 5px 10px;
 }
 
-#tomorrow {
-  background-color: red;
-  height: 100%;
-  color: white;
-  font-size: 2em;
-}
-
-#tomorrow a:hover {
-  text-decoration: none;
-}
-
-#plus-1 {
-  background-color: purple;
-  height: 100%;
-}
-
-#plus-2 {
+#time {
   background-color: gray;
-  height: 100%;
-}
-
-#plus-3 {
-  background-color: green;
-  height: 100%;
-}
-
-#plus-4 {
-  background-color: blue;
-  height: 100%;
-}
-
-#plus-5 {
-  background-color: orange;
-  height: 100%;
+  color:white;
+  padding: 10px;
+  font-size: 2em;
 }

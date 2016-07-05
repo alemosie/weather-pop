@@ -10,7 +10,6 @@ CurrentWeather.prototype.getTempColor = function(temp){
   }
 }
 
-CurrentWeather.border
 
 CurrentWeather.prototype.formatTempAndWeather = function(){
   return '<h1 style="color:' + this.tempColor + '">' + this.forecast.temp + "&deg; + " + this.forecast.weatherDetails + "</h1>";

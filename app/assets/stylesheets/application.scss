@@ -15,10 +15,12 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
-  @import 'https://fonts.googleapis.com/css?family=Bungee+Inline|Bungee+Shade';
+ @import 'https://fonts.googleapis.com/css?family=Bungee+Inline|Bungee+Shade';
+ @import 'https://fonts.googleapis.com/css?family=Pacifico';
+
 
 body {
-  background-color: white;
+  background-color: #CEEAE1;
   height: 100%;
   // 2C2E3A
 }
@@ -31,4 +33,48 @@ body {
   font-size: 60px;
   padding-top: 2px;
   padding-left: 30px;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
 }
+
+.day-box-hover{
+    padding: 0px;
+		position: relative;
+		overflow: hidden;
+	}
+	.day-box-hover:hover .caption{
+		opacity: 1;
+		transform: translateY(-150px);
+		-webkit-transform:translateY(-150px);
+		-moz-transform:translateY(-150px);
+		-ms-transform:translateY(-150px);
+		-o-transform:translateY(-150px);
+	}
+	.day-box-hover img{
+		z-index: 4;
+	}
+	.day-box-hover .caption{
+		position: absolute;
+		top:150px;
+		-webkit-transition:all 0.3s ease-in-out;
+		-moz-transition:all 0.3s ease-in-out;
+		-o-transition:all 0.3s ease-in-out;
+		-ms-transition:all 0.3s ease-in-out;
+		transition:all 0.3s ease-in-out;
+		width: 100%;
+	}
+	.day-box-hover .blur{
+		background-color: rgba(0,0,0,0.7);
+		z-index: 5;
+		position: absolute;
+		width: 100%;
+	}
+	.day-box-hover .caption-text{
+		z-index: 10;
+		color: #fff;
+		position: absolute;
+		height: 300px;
+		text-align: center;
+		top:-20px;
+		width: 100%;
+	}

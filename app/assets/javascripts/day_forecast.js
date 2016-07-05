@@ -73,7 +73,7 @@ DayForecast.prototype.getRelativeDayOfWeek = function(){
   } else if ((responseDay - curDay) === 1){
     return "Tomorrow"
   } else {
-    return this.dayOfWeek;
+    return responseDay - curDay;
   }
 }
 
@@ -82,19 +82,19 @@ DayForecast.prototype.getRelativeDayOfWeek = function(){
 DayForecast.prototype.getTempColor = function(temp){
   if (temp > 90) {
     return "#CD0805"
-  } else if (temp > 80) {
+  } else if (temp >= 80) {
     return "#CD5405"
-  } else if (temp > 70) {
+  } else if (temp >= 70) {
     return "#CDBB05"
-  } else if (temp > 60) {
+  } else if (temp >= 60) {
     return "#3FCD05"
-  } else if (temp > 50) {
+  } else if (temp >= 50) {
     return "#05CD87"
-  } else if (temp > 40) {
+  } else if (temp >= 40) {
     return "#05CDBB"
-  } else if (temp > 30) {
+  } else if (temp >= 30) {
     return "#05B8CD"
-  } else if (temp > 20) {
+  } else if (temp >= 20) {
     return "#057ECD"
   } else {
     return "#0520CD"
@@ -102,18 +102,34 @@ DayForecast.prototype.getTempColor = function(temp){
 }
 
 
-DayForecast.prototype.formatDay = function(){
-  return "<h1>" + this.relativeDayOfWeek + "'s weather at " + this.time + " is:</h1>";
+// DayForecast.prototype.formatTime = function(){
+//   return '<span id="time"' + this.time + "</span>";
+// }
+
+DayForecast.prototype.formatCurrentTempAndWeather = function(){
+  return '<h1 style="color:' + this.tempColor + '">' + this.getWeatherIcon() + " " + this.temp + "&deg;" + '<span id="weather">+ ' + this.weatherDetails + "</span></h1>";
 }
 
-DayForecast.prototype.formatTempAndWeather = function(){
-  return '<h1 style="color:' + this.tempColor + '">' + this.temp + "&deg; + " + '<span class="clouds"> ' + this.weatherDetails + "</span></h1>";
+DayForecast.prototype.formatFutureTempAndWeather = function(){
+  return '<span style="color:' + this.tempColor + '">' + this.temp + "&deg;<br>" + this.getWeatherIcon() + "</span>"
+}
+
+DayForecast.prototype.getWeatherIcon = function(){
+  if (this.weatherSimple.toLowerCase().includes("cloud")){
+    return '<img src="http://simpleicon.com/wp-content/uploads/cloud-10.png" height=40 width=40>'
+  } else if (this.weatherSimple.toLowerCase().includes("rain")){
+    return '<img src="http://downloadicons.net/sites/default/files/rain-icon-46110.png" height=40 width=40>'
+  } else if (this.weatherSimple.toLowerCase().includes("snow")){
+    return '<img src="https://cdn3.iconfinder.com/data/icons/glypho-weather/64/weather-snow-flake-512.png" height=40 width=40>'
+  } else {
+    return '<img src="http://www.freeiconspng.com/uploads/sun-icon-2.png" height=40 width=40>'
+  }
 }
 
 DayForecast.prototype.appendInfo = function(){
   if (this.relativeDayOfWeek === "Today") {
-    return '<div><h2>@' + this.time + ': </h2>' + this.formatTempAndWeather() + '</div><br>';
+    return '<div><span id="time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '</div><br>';
   } else {
-    return "<div>" + this.formatDay() + this.formatTempAndWeather() + "</div><br>";
+    return '<div class="day-box" title="' + this.time + '"' + this.formatFutureTempAndWeather() + "</div>"
   }
 }

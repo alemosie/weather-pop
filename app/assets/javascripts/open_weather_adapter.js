@@ -4,6 +4,7 @@ $(document).ready(function(){
 
   // var location = $("#location").val()
   // set default location
+
   var api = new OpenWeatherAdapter("newyork");
   api.getWeatherData();
 });
@@ -35,6 +36,16 @@ OpenWeatherAdapter.prototype.getWeatherData = function() {
       var day = new DayForecast(forecast, response.city)
       if (day.relativeDayOfWeek === "Today"){
         $('#current-weather').append(day.appendInfo());
+      } else if (day.relativeDayOfWeek === "Tomorrow") {
+        $('#tomorrow').append(day.appendInfo());
+      } else if (day.relativeDayOfWeek === 2) {
+        $('#plus-2').append(day.appendInfo());
+      } else if (day.relativeDayOfWeek === 3) {
+        $('#plus-3').append(day.appendInfo());
+      } else if (day.relativeDayOfWeek === 4) {
+        $('#plus-4').append(day.appendInfo());
+      } else if (day.relativeDayOfWeek === 5) {
+        $('#plus-5').append(day.appendInfo());
       }
     });
   });
