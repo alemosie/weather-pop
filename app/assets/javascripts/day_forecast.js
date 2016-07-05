@@ -95,7 +95,7 @@ function showDetails(id){
 
 DayForecast.prototype.currentWeatherDetails = function(index){
   var tableHead = '<table id=' + this.id + ' style="display:none;width:100%"><tr><th><h4>Humidity</h4></th><th><h4>Cloud coverage</h4></th></tr><tr>'
-  var tableFoot = '</tr></table>'
+  var tableFoot = '</tr></table><br><br>'
   var hum = '<td>' + this.humidity + "%</td>";
   var clouds = '<td>' + this.cloudCover + "%</td>";
   return tableHead + hum + clouds + tableFoot;
@@ -124,7 +124,7 @@ DayForecast.prototype.getWeatherIcon = function(){
 // append text/styling for all forecasts
 DayForecast.prototype.appendInfo = function(){
   if (this.relativeDayOfWeek === "Today") {
-    return '<div><span class="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '<br><br>' + this.currentWeatherDetails() + '</div><br><br>';
+    return '<div><span class="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '<br><br>' + this.currentWeatherDetails() + '</div>';
   } else {
     return '<div class="day-box"><div class="future-time">' + this.time + '</div>' + this.formatFutureTempAndWeather() + '</div>'
   }

@@ -25,6 +25,19 @@ body {
   padding-left: 30px;
   border-top: 5px solid black;
   border-bottom: 5px solid black;
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+
+  a {
+    color: rgb(51,51,51);
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 .circle {
