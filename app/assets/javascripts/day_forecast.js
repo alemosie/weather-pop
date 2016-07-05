@@ -1,5 +1,5 @@
 function DayForecast(json, location){
-  this.dateTime = this.convertForecastDateTime(json.dt_txt);
+  this.dateTime = this.convertForecastDateTime(json.dt_txt, json);
   this.time = this.getForecastTime();
   this.relativeDayOfWeek = this.getRelativeDayOfWeek();
   this.location = location.name;
@@ -14,14 +14,14 @@ function DayForecast(json, location){
   this.tempColor = this.getTempColor(this.temp);
 }
 
-DayForecast.prototype.convertForecastDateTime = function(respDT){
-  var dateTime = new Date(respDT);
+DayForecast.prototype.convertForecastDateTime = function(respDT, json){
+  var formattedDate = respDT.replace(/-/g, "/") // for Safari compatibility
+  var dateTime = new Date(formattedDate);
   var now = new Date();
   // get the hours' difference between UDT and local time, since Javascript date parsing automatically converts string to local time.
   var hoursDifferential = now.getTimezoneOffset() / 60
   dateTime.setHours(dateTime.getHours() - hoursDifferential);
   return dateTime;
-  debugger
 }
 
 DayForecast.prototype.getForecastTime = function(){
