@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>WeatherPop</title>
+  <%= favicon_link_tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,7 +10,7 @@
 <body>
 
   <div class="page-header">
-    WeatherPop: NYC
+    <img src="https://cartoontagging.files.wordpress.com/2014/03/pop-sunset.jpg" class="circle" height=50 width=50> WeatherPop: NYC
   </div>
 <%= yield %>
 

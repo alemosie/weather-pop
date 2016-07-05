@@ -101,11 +101,6 @@ DayForecast.prototype.getTempColor = function(temp){
   }
 }
 
-
-// DayForecast.prototype.formatTime = function(){
-//   return '<span id="time"' + this.time + "</span>";
-// }
-
 DayForecast.prototype.formatCurrentTempAndWeather = function(){
   return '<h1 style="color:' + this.tempColor + '">' + this.getWeatherIcon() + " " + this.temp + "&deg;" + '<span id="weather">+ ' + this.weatherDetails + "</span></h1>";
 }
@@ -128,8 +123,8 @@ DayForecast.prototype.getWeatherIcon = function(){
 
 DayForecast.prototype.appendInfo = function(){
   if (this.relativeDayOfWeek === "Today") {
-    return '<div><span id="time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '</div><br>';
+    return '<div><span id="current-time">' + this.time + "</span>" + this.formatCurrentTempAndWeather() + '</div><br>';
   } else {
-    return '<div class="day-box" title="' + this.time + '"' + this.formatFutureTempAndWeather() + "</div>"
+    return '<div class="day-box"><div class="future-time">' + this.time + '</div>' + this.formatFutureTempAndWeather() + '</div>'
   }
 }
