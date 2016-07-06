@@ -9,7 +9,7 @@ function DayForecast(json, location){
   this.weatherSimple = json.weather[0].main;
   this.weatherDetails = json.weather[0].description;
   this.tempColor = this.getTempColor(this.temp);
-  this.id = this.dayOfWeek + this.time.split(":")[0];
+  this.id = this.dayOfWeek + this.time.split(":")[0] + this.time.split(" ")[1]
 }
 
 //////----- DATA MANIPULATION -----//////
