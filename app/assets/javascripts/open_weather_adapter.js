@@ -16,7 +16,7 @@ OpenWeatherAdapter.prototype.getWeatherData = function() {
         $('#plus-2').append(day.appendInfo());
       } else if (day.relativeDayOfWeek === 3) {
         $('#plus-3').append(day.appendInfo());
-      } else if (day.relativeDayOfWeek === 4) {
+      } else {
         $('#plus-4').append(day.appendInfo());
       }
     });

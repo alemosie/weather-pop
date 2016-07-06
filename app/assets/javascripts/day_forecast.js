@@ -40,6 +40,8 @@ DayForecast.prototype.convertTemp = function(temp){
   return Math.round((1.8 * (temp - 273)) + 32);
 }
 
+// HUGE BUG
+
 // find how far away from today forecast day is
 DayForecast.prototype.getRelativeDayOfWeek = function(){
   var curDate = new Date();
