@@ -1,6 +1,7 @@
 function DayForecast(json, location){
   this.dateTime = this.convertForecastDateTime(json.dt_txt);
   this.time = this.getForecastTime();
+  this.dayOfWeek = getDayOfWeek(this.dateTime);
   this.relativeDayOfWeek = this.getRelativeDayOfWeek();
   this.temp = this.convertTemp(json.main.temp);
   this.humidity = json.main.humidity;
@@ -8,7 +9,7 @@ function DayForecast(json, location){
   this.weatherSimple = json.weather[0].main;
   this.weatherDetails = json.weather[0].description;
   this.tempColor = this.getTempColor(this.temp);
-  this.id = this.relativeDayOfWeek + this.time.split(":")[0];
+  this.id = this.dayOfWeek + this.time.split(":")[0];
 }
 
 //////----- DATA MANIPULATION -----//////
@@ -40,19 +41,17 @@ DayForecast.prototype.convertTemp = function(temp){
   return Math.round((1.8 * (temp - 273)) + 32);
 }
 
-// HUGE BUG
-
 // find how far away from today forecast day is
 DayForecast.prototype.getRelativeDayOfWeek = function(){
   var curDate = new Date();
   var curDay = curDate.getDay();
-  var responseDay = this.dateTime.getDay();
-  if (curDay === responseDay){
+  var respDay = this.dateTime.getDay();
+  if (curDay === respDay){
     return "Today"
-  } else if ((responseDay - curDay) === 1){
+  } else if ((respDay - curDay) === 1){
     return "Tomorrow"
   } else {
-    return responseDay - curDay;
+    return this.dayOfWeek;
   }
 }
 

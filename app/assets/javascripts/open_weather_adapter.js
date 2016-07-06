@@ -12,11 +12,11 @@ OpenWeatherAdapter.prototype.getWeatherData = function() {
         $('#current-weather').append(day.appendInfo());
       } else if (day.relativeDayOfWeek === "Tomorrow") {
         $('#tomorrow').append(day.appendInfo());
-      } else if (day.relativeDayOfWeek === 2) {
+      } else if (day.relativeDayOfWeek === getDayOfWeek(addDays(2))) {
         $('#plus-2').append(day.appendInfo());
-      } else if (day.relativeDayOfWeek === 3) {
+      } else if (day.relativeDayOfWeek === getDayOfWeek(addDays(3))) {
         $('#plus-3').append(day.appendInfo());
-      } else {
+      } else if (day.relativeDayOfWeek === getDayOfWeek(addDays(4))){
         $('#plus-4').append(day.appendInfo());
       }
     });
